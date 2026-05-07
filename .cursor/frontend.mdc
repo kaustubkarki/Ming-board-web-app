@@ -1,0 +1,17 @@
+---
+alwaysApply: true
+---
+
+# Rules & Memory
+
+Always  review .docs
+Send cursor position only when user moves, but throttle updates to ~50–100ms to avoid flooding the network.
+Always include userId, roomId, x, y, and a timestamp in the message.
+On receive, update only UI state per user and never mix it with document or shared data state.
+Remove cursors if a user has been inactive for more than ~5 seconds to keep UI clean.
+Never render your own cursor locally—only render other users’ cursors as an overlay layer.
+Use WebSocket only for small “operations/events” (like create/move/update), never send full app state on every change.
+Keep a strict message format with type, roomId, userId, payload, and timestamp for everything.
+Separate shared state (blocks, notes, data) from UI state (modals, hover, drag, local interactions).
+Apply changes optimistically on the client first, then sync with server to keep UI fast and responsive.
+Make everything room-based from the start and design for reconnection, deduplication, and out-of-order messages.
